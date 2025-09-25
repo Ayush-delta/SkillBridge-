@@ -92,6 +92,10 @@ body {
     color: hsl(var(--primary));
 }
 
+.nav-brand {
+    text-decoration: none;
+}
+
 .nav-menu {
     display: flex;
     gap: 2rem;

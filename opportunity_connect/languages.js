@@ -17,7 +17,7 @@ const translations = {
         featuredInternships: "Featured Internships",
         
         // About section
-        aboutTitle: "About Opportunity Connect",
+        aboutTitle: "About SkillBridge",
         aboutText: "We bridge the gap between student aspirations and real opportunities, making internship discovery simple and personalized.",
         
         // Profile page
@@ -28,7 +28,8 @@ const translations = {
         next: "Next",
         previous: "Previous",
         submit: "Submit",
-        name: "Name",
+        firstName: "First Name",
+        lastName: "Last Name",
         email: "Email",
         
         // Recommendations
