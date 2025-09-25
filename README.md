@@ -45,6 +45,3 @@ Opportunity Connect is a platform dedicated to democratizing access to quality i
 - Manage your applications and track progress
 
 
-
-
-Let me know if you want the README customized with more details or instructions from your project files.
