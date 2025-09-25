@@ -2,6 +2,7 @@
 let currentLanguage = 'en';
 let currentStep = 1;
 let userProfile = {};
+let allInternshipsData = []; // Store all internships globally
 
 // Initialize the application
 document.addEventListener('DOMContentLoaded', function() {
@@ -13,22 +14,30 @@ document.addEventListener('DOMContentLoaded', function() {
 // Language Management
 function initializeLanguage() {
     const languageSelect = document.getElementById('languageSelect');
+    const languageSelectMobile = document.getElementById('languageSelectMobile');
     const savedLanguage = localStorage.getItem('preferredLanguage') || 'en';
-    
+
     if (languageSelect) {
         languageSelect.value = savedLanguage;
         languageSelect.addEventListener('change', function() {
             changeLanguage(this.value);
         });
     }
-    
+
+    if (languageSelectMobile) {
+        languageSelectMobile.value = savedLanguage;
+        languageSelectMobile.addEventListener('change', function() {
+            changeLanguage(this.value);
+        });
+    }
+
     changeLanguage(savedLanguage);
 }
 
 function changeLanguage(lang) {
     currentLanguage = lang;
     localStorage.setItem('preferredLanguage', lang);
-    
+
     // Update all translatable elements
     const translatableElements = document.querySelectorAll('[data-translate]');
     translatableElements.forEach(element => {
@@ -37,11 +46,15 @@ function changeLanguage(lang) {
             element.textContent = translations[lang][key];
         }
     });
-    
-    // Update language selector
+
+    // Update language selectors
     const languageSelect = document.getElementById('languageSelect');
     if (languageSelect) {
         languageSelect.value = lang;
+    }
+    const languageSelectMobile = document.getElementById('languageSelectMobile');
+    if (languageSelectMobile) {
+        languageSelectMobile.value = lang;
     }
 }
 
@@ -49,14 +62,32 @@ function changeLanguage(lang) {
 function initializeNavigation() {
     // Mobile menu toggle
     const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-    const navMenu = document.getElementById('navMenu');
-    
-    if (mobileMenuToggle && navMenu) {
+    const mobileNavSidebar = document.getElementById('mobileNavSidebar');
+    const mobileMenuClose = document.getElementById('mobileMenuClose');
+    const navMenuMobile = document.getElementById('navMenuMobile');
+    const navActionsMobile = document.getElementById('navActionsMobile');
+
+    if (mobileMenuToggle && mobileNavSidebar && mobileMenuClose) {
         mobileMenuToggle.addEventListener('click', function() {
-            navMenu.classList.toggle('active');
+            mobileNavSidebar.classList.toggle('active');
+            this.classList.toggle('open');
+        });
+
+        mobileMenuClose.addEventListener('click', function() {
+            mobileNavSidebar.classList.remove('active');
+            mobileMenuToggle.classList.remove('open');
+        });
+
+        // Close mobile menu when a nav link or action button is clicked inside the sidebar
+        const allMobileToggleElements = [...navMenuMobile.querySelectorAll('.nav-link'), ...navActionsMobile.querySelectorAll('.btn-outline, .btn-primary')];
+        allMobileToggleElements.forEach(element => {
+            element.addEventListener('click', function() {
+                mobileNavSidebar.classList.remove('active');
+                mobileMenuToggle.classList.remove('open');
+            });
         });
     }
-    
+
     // Smooth scroll for anchor links
     const scrollLinks = document.querySelectorAll('.scroll-link, .scroll-to-about');
     scrollLinks.forEach(link => {
@@ -187,13 +218,18 @@ function createInternshipCard(internship) {
 
 // Profile Page Functions
 function initializeProfilePage() {
+    console.log('Initializing Profile Page');
     loadSkills();
     initializeProfileForm();
 }
 
 function loadSkills() {
     const skillsGrid = document.getElementById('skillsGrid');
-    if (!skillsGrid) return;
+    if (!skillsGrid) {
+        console.log('Skills grid container not found!');
+        return;
+    }
+    console.log('Skills grid container found:', skillsGrid);
     
     const skills = [
         'JavaScript', 'Python', 'Java', 'React', 'Node.js', 'HTML/CSS',
@@ -211,13 +247,17 @@ function loadSkills() {
     
     // Add click handlers for skill selection
     const skillCheckboxes = skillsGrid.querySelectorAll('.skill-checkbox');
+    console.log('Number of skill checkboxes found:', skillCheckboxes.length);
     skillCheckboxes.forEach(checkbox => {
         checkbox.addEventListener('click', function(e) {
+            console.log('Skill checkbox clicked:', this);
             if (e.target.type !== 'checkbox') {
                 const input = this.querySelector('input[type="checkbox"]');
                 input.checked = !input.checked;
+                console.log('Checkbox checked state:', input.checked);
             }
             this.classList.toggle('selected', this.querySelector('input').checked);
+            console.log('Selected class toggled:', this.classList.contains('selected'));
         });
     });
 }
@@ -505,13 +545,224 @@ function createRecommendationCard(rec) {
 
 // Internships Page Functions
 function initializeInternshipsPage() {
+    console.log('Initializing Internships Page');
     loadAllInternships();
     initializeFilters();
 }
 
 function loadAllInternships() {
-    // This would typically load from an API
-    // For now, we'll use static data
+    const container = document.getElementById('internshipsGrid'); // Assuming an ID for the internships grid
+    if (!container) {
+        console.log('Internships grid container not found!');
+        return;
+    }
+
+    // Static internship data (you would replace this with API call)
+    const allInternships = [
+        {
+            title: "Full Stack Developer Intern",
+            company: "InnovateX Labs",
+            location: "Hyderabad, Telangana",
+            type: "Paid",
+            duration: "6 months",
+            category: "Web Development",
+            skills: ["Node.js", "Express.js", "MongoDB", "React"],
+            description: "Join our dynamic team to work on cutting-edge web applications. Gain hands-on experience with both frontend and backend technologies.",
+            postDate: "2 days ago"
+        },
+        {
+            title: "UI/UX Design Intern",
+            company: "DesignStream Studios",
+            location: "Pune, Maharashtra",
+            type: "Unpaid",
+            duration: "3 months",
+            category: "Design",
+            skills: ["Figma", "Sketch", "User Research", "Prototyping"],
+            description: "Shape user experiences and visual interfaces for our next-generation products. A great opportunity to build your design portfolio.",
+            postDate: "1 week ago"
+        },
+        {
+            title: "Data Science Intern",
+            company: "AnalyGen Solutions",
+            location: "Bangalore, Karnataka",
+            type: "Paid",
+            duration: "4 months",
+            category: "Data Science",
+            skills: ["Python", "R", "Machine Learning", "SQL"],
+            description: "Work with large datasets, build predictive models, and extract actionable insights. Perfect for aspiring data scientists.",
+            postDate: "3 days ago"
+        },
+        {
+            title: "Mobile App Development Intern",
+            company: "AppSwift Innovations",
+            location: "Chennai, Tamil Nadu",
+            type: "Paid",
+            duration: "5 months",
+            category: "Mobile Development",
+            skills: ["Android", "Kotlin", "iOS", "Swift"],
+            description: "Contribute to the development of our flagship mobile applications. Learn best practices in mobile UI and backend integration.",
+            postDate: "4 days ago"
+        },
+        {
+            title: "Content Writing Intern",
+            company: "WordCraft Media",
+            location: "Remote",
+            type: "Paid",
+            duration: "3 months",
+            category: "Content Writing",
+            skills: ["SEO Writing", "Blogging", "Copywriting", "Grammar"],
+            description: "Create engaging content for our website, blogs, and social media. Enhance your writing skills and learn about content strategy.",
+            postDate: "1 day ago"
+        },
+        {
+            title: "Cybersecurity Intern",
+            company: "SecureShield Tech",
+            location: "Delhi, NCR",
+            type: "Unpaid",
+            duration: "6 months",
+            category: "Cybersecurity",
+            skills: ["Network Security", "Penetration Testing", "Linux", "Firewalls"],
+            description: "Assist in vulnerability assessments and security audits. A challenging role for those passionate about digital security.",
+            postDate: "1 week ago"
+        },
+        {
+            title: "HR Intern",
+            company: "PeopleConnect Inc.",
+            location: "Mumbai, Maharashtra",
+            type: "Paid",
+            duration: "3 months",
+            category: "Human Resources",
+            skills: ["Recruitment", "Onboarding", "HR Policies"],
+            description: "Support the HR department in various functions including recruitment, employee engagement, and policy implementation.",
+            postDate: "5 days ago"
+        },
+        {
+            title: "Financial Analyst Intern",
+            company: "CapitalFlow Partners",
+            location: "Delhi, NCR",
+            type: "Paid",
+            duration: "6 months",
+            category: "Finance",
+            skills: ["Financial Modeling", "Valuation", "Market Research"],
+            description: "Gain exposure to financial analysis, market research, and investment strategies in a fast-paced environment.",
+            postDate: "2 weeks ago"
+        },
+        {
+            title: "Product Management Intern",
+            company: "InnovateX Labs",
+            location: "Bangalore, Karnataka",
+            type: "Paid",
+            duration: "4 months",
+            category: "Product Management",
+            skills: ["Product Strategy", "Market Analysis", "Roadmapping"],
+            description: "Work closely with product managers to define product vision, strategy, and roadmap. Ideal for future product leaders.",
+            postDate: "1 day ago"
+        },
+        {
+            title: "DevOps Intern",
+            company: "CloudBurst Solutions",
+            location: "Hyderabad, Telangana",
+            type: "Unpaid",
+            duration: "6 months",
+            category: "DevOps",
+            skills: ["AWS", "Docker", "Kubernetes", "CI/CD"],
+            description: "Learn to automate and streamline development operations. Experience cloud infrastructure and continuous delivery pipelines.",
+            postDate: "3 weeks ago"
+        },
+        {
+            title: "Technical Support Intern",
+            company: "GlobalConnect Services",
+            location: "Remote",
+            type: "Paid",
+            duration: "3 months",
+            category: "Technical Support",
+            skills: ["Troubleshooting", "Customer Service", "Ticketing Systems"],
+            description: "Provide technical assistance to clients, diagnose issues, and ensure smooth operation of our software solutions.",
+            postDate: "4 days ago"
+        },
+        {
+            title: "UI Developer Intern",
+            company: "PixelPerfect Inc.",
+            location: "Chennai, Tamil Nadu",
+            type: "Paid",
+            duration: "5 months",
+            category: "Web Development",
+            skills: ["HTML", "CSS", "JavaScript", "Vue.js"],
+            description: "Focus on creating beautiful and responsive user interfaces. Collaborate with designers and backend developers.",
+            postDate: "1 week ago"
+        }
+    ];
+    console.log('Internships data loaded:', allInternships.length, 'items');
+
+    allInternshipsData = allInternships; // Store all internships globally
+    container.innerHTML = allInternships.map(internship => createInternshipCardFull(internship)).join('');
+
+    // Update results count
+    const resultsCountElement = document.getElementById('resultsCount');
+    if (resultsCountElement) {
+        resultsCountElement.textContent = `${allInternships.length} Internships Found`;
+    }
+    displayInternships(allInternshipsData);
+}
+
+function displayInternships(internshipsToDisplay) {
+    const container = document.getElementById('internshipsGrid');
+    const resultsCountElement = document.getElementById('resultsCount');
+
+    if (!container) return;
+
+    if (internshipsToDisplay.length === 0) {
+        container.innerHTML = '<p class="no-results-message">No internships found matching your criteria.</p>';
+        if (resultsCountElement) {
+            resultsCountElement.textContent = '0 Internships Found';
+        }
+        return;
+    }
+
+    container.innerHTML = internshipsToDisplay.map(internship => createInternshipCardFull(internship)).join('');
+    if (resultsCountElement) {
+        resultsCountElement.textContent = `${internshipsToDisplay.length} Internships Found`;
+    }
+}
+
+function createInternshipCardFull(internship) {
+    const skillsBadges = internship.skills.map(skill => 
+        `<span class="skill-badge">${skill}</span>`
+    ).join('');
+    
+    return `
+        <div class="internship-card">
+            <div class="card-header">
+                <div class="card-badges">
+                    <span class="badge badge-secondary">${internship.category}</span>
+                    ${internship.type === 'Paid' ? '<span class="badge badge-paid">💰 Paid</span>' : '<span class="badge badge-secondary">Free</span>'}
+                </div>
+                <h3 class="card-title">${internship.title}</h3>
+                <p class="card-company">${internship.company}</p>
+            </div>
+            <div class="card-meta">
+                <div class="card-meta-item">
+                    <span class="icon">📍</span>
+                    ${internship.location}
+                </div>
+                <div class="card-meta-item">
+                    <span class="icon">🕒</span>
+                    ${internship.duration}
+                </div>
+            </div>
+            <p class="card-description">${internship.description}</p>
+            <div class="card-skills">
+                ${skillsBadges}
+            </div>
+            <div class="card-footer">
+                <span class="card-post-date">Posted ${internship.postDate}</span>
+                <div class="card-buttons">
+                    <a href="#" class="btn-outline card-button-outline">View Details</a>
+                    <a href="#" class="btn-primary card-button-primary">Apply Now</a>
+                </div>
+            </div>
+        </div>
+    `;
 }
 
 function initializeFilters() {
@@ -531,10 +782,56 @@ function initializeFilters() {
     if (categoryFilter) {
         categoryFilter.addEventListener('change', filterInternships);
     }
+
+    const applyFiltersBtn = document.querySelector('.apply-filters');
+    if (applyFiltersBtn) {
+        applyFiltersBtn.addEventListener('click', filterInternships);
+    }
+
+    const clearFiltersBtn = document.querySelector('.clear-filters');
+    if (clearFiltersBtn) {
+        clearFiltersBtn.addEventListener('click', clearAllFilters);
+    }
 }
 
 function filterInternships() {
-    // Implement filtering logic
+    const searchInput = document.getElementById('searchInput').value.toLowerCase();
+    const locationFilter = document.getElementById('locationFilter').value.toLowerCase();
+    const categoryFilter = document.getElementById('categoryFilter').value.toLowerCase();
+    const typeFilter = document.getElementById('typeFilter').value.toLowerCase();
+    const durationFilter = document.getElementById('durationFilter').value.toLowerCase();
+
+    const filteredInternships = allInternshipsData.filter(internship => {
+        const matchesSearch = (
+            internship.title.toLowerCase().includes(searchInput) ||
+            internship.company.toLowerCase().includes(searchInput) ||
+            internship.skills.some(skill => skill.toLowerCase().includes(searchInput))
+        );
+
+        const matchesLocation = locationFilter === '' || internship.location.toLowerCase().includes(locationFilter);
+        const matchesCategory = categoryFilter === '' || internship.category.toLowerCase().includes(categoryFilter);
+        const matchesType = typeFilter === '' || internship.type.toLowerCase() === typeFilter;
+
+        const matchesDuration = durationFilter === '' || (
+            durationFilter === '1-2' && (internship.duration.includes('1') || internship.duration.includes('2')) ||
+            durationFilter === '3-4' && (internship.duration.includes('3') || internship.duration.includes('4')) ||
+            durationFilter === '5-6' && (internship.duration.includes('5') || internship.duration.includes('6')) ||
+            durationFilter === '6+' && (parseInt(internship.duration.split(' ')[0]) >= 6) // Assuming duration is like "X months"
+        );
+
+        return matchesSearch && matchesLocation && matchesCategory && matchesType && matchesDuration;
+    });
+
+    displayInternships(filteredInternships);
+}
+
+function clearAllFilters() {
+    document.getElementById('searchInput').value = '';
+    document.getElementById('locationFilter').value = '';
+    document.getElementById('categoryFilter').value = '';
+    document.getElementById('typeFilter').value = '';
+    document.getElementById('durationFilter').value = '';
+    filterInternships(); // Re-apply filters to show all internships
 }
 
 // Contact Page Functions
