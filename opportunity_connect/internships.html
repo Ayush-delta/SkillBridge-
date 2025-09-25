@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Internships - Opportunity Connect</title>
+    <meta name="description" content="Browse and search through hundreds of verified internship opportunities across India. Find the perfect match for your skills and career goals.">
+    <link rel="icon" href="/favicon.ico">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="nav-brand">
+                <h2 class="brand-title">Opportunity Connect</h2>
+            </div>
+            <nav class="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="internships.html" class="nav-link active">Internships</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </nav>
+            <div class="nav-actions">
+                <select id="languageSelect" class="language-select">
+                    <option value="en">English</option>
+                    <option value="hi">हिंदी</option>
+                    <option value="ta">தமிழ்</option>
+                </select>
+            </div>
+        </div>
+    </header>
+
+    <!-- Internships Main -->
+    <main class="internships-main">
+        <div class="container">
+            <!-- Header -->
+            <section class="internships-header">
+                <h1 class="internships-title">Browse Internships</h1>
+                <p class="internships-subtitle">Discover opportunities across India that match your skills and interests</p>
+            </section>
+
+            <!-- Filters Section -->
+            <section class="filters-section">
+                <div class="filters-container">
+                    <!-- Search -->
+                    <div class="search-group">
+                        <input type="text" id="searchInput" class="search-input" placeholder="Search internships, companies, or skills...">
+                        <button class="search-button">🔍</button>
+                    </div>
+                    
+                    <!-- Filters -->
+                    <div class="filters-grid">
+                        <div class="filter-group">
+                            <label for="locationFilter" class="filter-label">Location</label>
+                            <select id="locationFilter" class="filter-select">
+                                <option value="">All Locations</option>
+                                <option value="mumbai">Mumbai</option>
+                                <option value="delhi">Delhi NCR</option>
+                                <option value="bangalore">Bangalore</option>
+                                <option value="hyderabad">Hyderabad</option>
+                                <option value="chennai">Chennai</option>
+                                <option value="pune">Pune</option>
+                                <option value="kolkata">Kolkata</option>
+                                <option value="remote">Remote</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label for="categoryFilter" class="filter-label">Category</label>
+                            <select id="categoryFilter" class="filter-select">
+                                <option value="">All Categories</option>
+                                <option value="web-development">Web Development</option>
+                                <option value="mobile-development">Mobile Development</option>
+                                <option value="data-science">Data Science</option>
+                                <option value="digital-marketing">Digital Marketing</option>
+                                <option value="content-writing">Content Writing</option>
+                                <option value="graphic-design">Graphic Design</option>
+                                <option value="data-entry">Data Entry</option>
+                                <option value="business-development">Business Development</option>
+                                <option value="hr">Human Resources</option>
+                                <option value="finance">Finance</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label for="typeFilter" class="filter-label">Type</label>
+                            <select id="typeFilter" class="filter-select">
+                                <option value="">All Types</option>
+                                <option value="paid">Paid Only</option>
+                                <option value="unpaid">Unpaid Only</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label for="durationFilter" class="filter-label">Duration</label>
+                            <select id="durationFilter" class="filter-select">
+                                <option value="">Any Duration</option>
+                                <option value="1-2">1-2 months</option>
+                                <option value="3-4">3-4 months</option>
+                                <option value="5-6">5-6 months</option>
+                                <option value="6+">6+ months</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="filters-actions">
+                        <button class="btn-outline clear-filters">Clear All</button>
+                        <button class="btn-primary apply-filters">Apply Filters</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <section class="results-section">
+                <div class="results-header">
+                    <div class="results-count">
+                        <span id="resultsCount">Loading...</span>
+                    </div>
+                    <div class="results-sort">
+                        <label for="sortSelect">Sort by:</label>
+                        <select id="sortSelect" class="sort-select">
+                            <option value="relevance">Relevance</option>
+                            <option value="date">Date Posted</option>
+                            <option value="company">Company Name</option>
+                            <option value="location">Location</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="internships-grid" id="internshipsGrid">
+                    <!-- Internship cards will be populated by JavaScript -->
+                </div>
+
+                <!-- Load More Button -->
+                <div class="load-more-section">
+                    <button class="btn-outline load-more-btn" id="loadMoreBtn">Load More Internships</button>
+                </div>
+            </section>
+
+            <!-- CTA Section -->
+            <section class="internships-cta">
+                <div class="cta-content">
+                    <h2 class="cta-title">Can't Find What You're Looking For?</h2>
+                    <p class="cta-text">Create your profile and get personalized recommendations based on your skills and preferences.</p>
+                    <div class="cta-buttons">
+                        <a href="profile.html" class="btn-primary">Create Profile</a>
+                        <a href="recommendations.html" class="btn-outline">View Recommendations</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-title">Opportunity Connect</h3>
+                    <p class="footer-text">Bridging the gap between student aspirations and real opportunities.</p>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-heading">Quick Links</h4>
+                    <div class="footer-links">
+                        <a href="index.html" class="footer-link">Home</a>
+                        <a href="about.html" class="footer-link">About</a>
+                        <a href="internships.html" class="footer-link">Internships</a>
+                        <a href="contact.html" class="footer-link">Contact</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-heading">Contact Info</h4>
+                    <div class="footer-links">
+                        <span class="footer-contact">hello@opportunityconnect.in</span>
+                        <span class="footer-contact">+91 12345 67890</span>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Opportunity Connect. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="languages.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

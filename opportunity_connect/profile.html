@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Your Profile - Opportunity Connect</title>
+    <meta name="description" content="Create your personalized profile to get tailored internship recommendations that match your skills and preferences.">
+    <link rel="icon" href="/favicon.ico">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="nav-brand">
+                <h2 class="brand-title">Opportunity Connect</h2>
+            </div>
+            <nav class="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="internships.html" class="nav-link">Internships</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </nav>
+            <div class="nav-actions">
+                <select id="languageSelect" class="language-select">
+                    <option value="en">English</option>
+                    <option value="hi">हिंदी</option>
+                    <option value="ta">தமிழ்</option>
+                </select>
+            </div>
+        </div>
+    </header>
+
+    <!-- Profile Form -->
+    <main class="profile-main">
+        <div class="container">
+            <div class="profile-header">
+                <h1 class="profile-title" data-translate="profileTitle">Create Your Profile</h1>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="step-indicator">
+                    <span class="step-text">Step <span id="currentStep">1</span> of 3</span>
+                </div>
+            </div>
+
+            <div class="profile-form-container">
+                <form id="profileForm" class="profile-form">
+                    <!-- Step 1: Personal Information -->
+                    <div class="form-step active" id="step1">
+                        <div class="step-header">
+                            <h2 class="step-title" data-translate="personalInfo">Personal Information</h2>
+                            <p class="step-subtitle">Tell us about yourself</p>
+                        </div>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="fullName" class="form-label" data-translate="name">Full Name</label>
+                                <input type="text" id="fullName" name="fullName" class="form-input" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email" class="form-label" data-translate="email">Email</label>
+                                <input type="email" id="email" name="email" class="form-input" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone" class="form-label">Phone Number</label>
+                                <input type="tel" id="phone" name="phone" class="form-input" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="age" class="form-label">Age</label>
+                                <input type="number" id="age" name="age" class="form-input" min="16" max="35" required>
+                            </div>
+                            <div class="form-group form-group-full">
+                                <label for="education" class="form-label">Education Level</label>
+                                <select id="education" name="education" class="form-select" required>
+                                    <option value="">Select your education level</option>
+                                    <option value="high-school">High School</option>
+                                    <option value="diploma">Diploma</option>
+                                    <option value="undergraduate">Undergraduate</option>
+                                    <option value="graduate">Graduate</option>
+                                    <option value="postgraduate">Postgraduate</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Skills & Interests -->
+                    <div class="form-step" id="step2">
+                        <div class="step-header">
+                            <h2 class="step-title" data-translate="skills">Skills & Interests</h2>
+                            <p class="step-subtitle">What are you passionate about?</p>
+                        </div>
+                        <div class="skills-section">
+                            <label class="form-label">Select your skills (choose multiple):</label>
+                            <div class="skills-grid" id="skillsGrid">
+                                <!-- Skills will be populated by JavaScript -->
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="experience" class="form-label">Previous Experience</label>
+                            <select id="experience" name="experience" class="form-select" required>
+                                <option value="">Select your experience level</option>
+                                <option value="none">No prior experience</option>
+                                <option value="some">Some project work</option>
+                                <option value="internship">Previous internship</option>
+                                <option value="freelance">Freelance work</option>
+                                <option value="part-time">Part-time job</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Preferences -->
+                    <div class="form-step" id="step3">
+                        <div class="step-header">
+                            <h2 class="step-title" data-translate="preferences">Preferences</h2>
+                            <p class="step-subtitle">Help us find the perfect match</p>
+                        </div>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="location" class="form-label">Preferred Location</label>
+                                <select id="location" name="location" class="form-select" required>
+                                    <option value="">Select your preferred location</option>
+                                    <option value="mumbai">Mumbai, Maharashtra</option>
+                                    <option value="delhi">Delhi, NCR</option>
+                                    <option value="bangalore">Bangalore, Karnataka</option>
+                                    <option value="hyderabad">Hyderabad, Telangana</option>
+                                    <option value="chennai">Chennai, Tamil Nadu</option>
+                                    <option value="pune">Pune, Maharashtra</option>
+                                    <option value="kolkata">Kolkata, West Bengal</option>
+                                    <option value="remote">Remote Work</option>
+                                    <option value="any">Any Location</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="workType" class="form-label">Work Type Preference</label>
+                                <select id="workType" name="workType" class="form-select" required>
+                                    <option value="">Select work type</option>
+                                    <option value="paid">Paid Internships Only</option>
+                                    <option value="unpaid">Unpaid Internships Only</option>
+                                    <option value="both">Both Paid & Unpaid</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="duration" class="form-label">Preferred Duration</label>
+                                <select id="duration" name="duration" class="form-select" required>
+                                    <option value="">Select duration</option>
+                                    <option value="1-2">1-2 months</option>
+                                    <option value="3-4">3-4 months</option>
+                                    <option value="5-6">5-6 months</option>
+                                    <option value="6+">6+ months</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="startDate" class="form-label">When can you start?</label>
+                                <select id="startDate" name="startDate" class="form-select" required>
+                                    <option value="">Select start time</option>
+                                    <option value="immediately">Immediately</option>
+                                    <option value="1-week">Within 1 week</option>
+                                    <option value="2-weeks">Within 2 weeks</option>
+                                    <option value="1-month">Within 1 month</option>
+                                    <option value="flexible">Flexible</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Navigation Buttons -->
+                    <div class="form-navigation">
+                        <button type="button" id="prevBtn" class="btn-outline" style="display: none;" data-translate="previous">Previous</button>
+                        <button type="button" id="nextBtn" class="btn-primary" data-translate="next">Next</button>
+                        <button type="submit" id="submitBtn" class="btn-primary" style="display: none;" data-translate="submit">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-title">Opportunity Connect</h3>
+                    <p class="footer-text">Bridging the gap between student aspirations and real opportunities.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Opportunity Connect. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="languages.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
