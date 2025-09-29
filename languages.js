@@ -1,4 +1,4 @@
-// Language translations
+
 const translations = {
     en: {
         // Navigation
@@ -48,6 +48,24 @@ const translations = {
         loading: "Loading...",
         error: "Something went wrong",
         success: "Success!",
+
+
+        opportunityConnect: "Opportunity Connect",
+        aboutOpportunityConnect: "We connect students with their dream internships, making career aspirations a reality.",
+        quickLinks: "Quick Links",
+        followUs: "Follow Us",
+        allRightsReserved: "© 2025 Opportunity Connect. All rights reserved.",
+
+        createYourProfile: "Create Your Profile",
+        personalInformation: "Personal Information",
+        skillsAndInterests: "Skills & Interests",
+        browseOpportunities: "Browse Opportunities",
+        viewRecommendations: "View Recommendations",
+        preferences: "Preferences",
+        cantFindWhatYoureLookingFor: "Can't find what you're looking for?",
+        reachOutToUs: "Reach out to us!",
+        name: "Name",
+        emailAddress: "Email Address",
     },
     hi: {
         // Navigation
@@ -144,5 +162,56 @@ const translations = {
         loading: "ஏற்றுகிறது...",
         error: "ஏதோ தவறு நடந்துள்ளது",
         success: "வெற்றி!",
+    },
+
+    bn: {
+        // Navigation
+        home: "হোম",
+        about: "আমাদের সম্পর্কে",
+        internships: "ইন্টার্নশিপ",
+        contact: "যোগাযোগ",
+        signIn: "সাইন ইন",
+        signUp: "সাইন আপ",
+        
+        // Home page
+        heroTitle: "আপনার নিখুঁত ইন্টার্নশিপ খুঁজুন",
+        heroSubtitle: "আপনার দক্ষতা এবং আকাঙ্ক্ষার সাথে মিলে যায় এমন সুযোগের সাথে সংযুক্ত হন",
+        getStarted: "শুরু করুন",
+        learnMore: "আরও জানুন",
+        featuredInternships: "বৈশিষ্ট্যযুক্ত ইন্টার্নশিপ",
+        
+        // About section
+        aboutTitle: "স্কিলব্রিজ সম্পর্কে",
+        aboutText: "আমরা ছাত্রদের আকাঙ্ক্ষা এবং প্রকৃত সুযোগের মধ্যে ব্যবধান পূরণ করি, ইন্টার্নশিপ আবিষ্কারকে সহজ এবং ব্যক্তিগতকৃত করি",
+        
+        // Profile page
+        profileTitle: "আপনার প্রোফাইল তৈরি করুন",
+        personalInfo: "ব্যক্তিগত তথ্য",
+        skills: "দক্ষতা এবং আগ্রহ",
+        preferences: "পছন্দসমূহ",
+        next: "পরবর্তী",
+        previous: "পূর্ববর্তী",
+        submit: "জমা দিন",
+        firstName: "প্রথম নাম",
+        lastName: "শেষ নাম",
+        email: "ইমেইল",
+        
+        // Recommendations
+        recommendationsTitle: "আপনার ব্যক্তিগত সুপারিশ",
+        whyRecommended: "এটি আপনার সাথে কেন মেলে:",
+        viewDetails: "বিস্তারিত দেখুন",
+        applyNow: "এখনই আবেদন করুন",
+        
+        // Contact
+        contactTitle: "আমাদের সাথে যোগাযোগ করুন",
+        contactSubtitle: "আমরা আপনার কাছ থেকে শুনতে পছন্দ করব",
+        message: "বার্তা",
+        send: "বার্তা পাঠান",
+        
+        // Common
+        loading: "লোড হচ্ছে...",
+        error: "কিছু ভুল হয়েছে",
+        success: "সফল!",
     }
+
 };
