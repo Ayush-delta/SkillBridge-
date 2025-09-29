@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 
+=======
+// Language translations
+>>>>>>> 3496d373154a3a50ad81468310e9438fde92e916
 const translations = {
     en: {
         // Navigation
@@ -48,6 +52,7 @@ const translations = {
         loading: "Loading...",
         error: "Something went wrong",
         success: "Success!",
+<<<<<<< HEAD
 
 
         opportunityConnect: "Opportunity Connect",
@@ -66,6 +71,8 @@ const translations = {
         reachOutToUs: "Reach out to us!",
         name: "Name",
         emailAddress: "Email Address",
+=======
+>>>>>>> 3496d373154a3a50ad81468310e9438fde92e916
     },
     hi: {
         // Navigation
@@ -162,6 +169,7 @@ const translations = {
         loading: "ஏற்றுகிறது...",
         error: "ஏதோ தவறு நடந்துள்ளது",
         success: "வெற்றி!",
+<<<<<<< HEAD
     },
 
     bn: {
@@ -214,4 +222,7 @@ const translations = {
         success: "সফল!",
     }
 
+=======
+    }
+>>>>>>> 3496d373154a3a50ad81468310e9438fde92e916
 };
